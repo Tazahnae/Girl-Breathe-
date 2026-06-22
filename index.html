@@ -1,2 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<title>Girl, Breathe — Sunflower Sanctuary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --petal:#F5C842;--petal-d:#D4930A;--petal-b:#C4580A;--petal-r:#A84008;
+  --petal-lt:#FFF3B0;--petal-sf:#FFF8D0;--petal-wm:#FFEEA0;
+  --brn:#3D1F00;--brn-m:#6B3A0A;--brn-l:#A06030;
+  --cr:#FFFDF4;--cr-s:#FFF8E8;--cr-w:#FFF0C8;
+  --leaf:#4A7A12;--stem:#2E5A08;--lf-s:#EAF3DE;--lf-m:#C0DD97;
+  --txt:#2A1500;--txt-m:#5C3A0A;--txt-mu:#8C6A3A;--txt-h:#BCA070;
+  --bdr:#EAD090;--bdr-s:#F5EAC0;
+  --sh:0 2px 12px rgba(61,31,0,.09);
+  --sh-m:0 4px 20px rgba(61,31,0,.13);
+  --sh-l:0 8px 36px rgba(61,31,0,.18);
+  --r:12px;--r-lg:18px;--r-xl:28px;
+  --ease:.18s ease;
+  --dp:'Playfair Display',Georgia,serif;
+  --bd:'DM Sans',system-ui,sans-serif;
+  --nav-h:60px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:var(--bd);background:var(--cr);color:var(--txt);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font-family:var(--bd)}
+button{cursor:pointer}
+a{text-decoration:none}
+img,svg{display:block}
+#shell{display:flex;flex-direction:column;height:100%;position:relative}
+#landing{position:fixed;inset:0;z-index:500;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:#0A0300;transition:opacity .7s ease,transform .7s ease}
+#landing.out{opacity:0;transform:scale(1.03);pointer-events:none}
+.fp-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fp{position:absolute;border-radius:60% 40% 60% 40%;background:rgba(245,200,66,.055);animation:rp linear infinite}
+@keyframes rp{0%{transform:translateY(108vh) rotate(0deg);opacity:0}8%{opacity:1}92%{opacity:.3}100%{transform:translateY(-8vh) rotate(560deg);opacity:0}}
+.lp-wrap{position:relative;z-index:1}
+.lp-hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 28px 52px;text-align:center;background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(245,200,66,.1) 0%,transparent 68%),linear-gradient(175deg,#1C0800 0%,#0A0300 55%,#050100 100%)}
+.lp-sf{width:148px;height:160px;margin:0 auto 28px;animation:lf 4s ease-in-out infinite;filter:drop-shadow(0 10px 28px rgba(245,200,66,.2))}
+@keyframes lf{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+.lp-eye{font-size:.67rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,200,66,.4);font-weight:500;margin-bottom:16px}
+.lp-h1{font-family:var(--dp);font-size:clamp(3.4rem,12vw,6rem);color:var(--petal);line-height:.96;margin-bottom:14px;text-shadow:0 4px 40px rgba(245,200,66,.14)}
+.lp-h1 em{color:#FFE888;font-style:italic}
+.lp-tag{font-size:clamp(.9rem,3vw,1.05rem);color:rgba(255,248,220,.48);line-height:1.8;max-width:28ch;margin:0 auto 42px}
+.sc-hint{display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(245,200,66,.26);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;animation:nudge 2.3s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}55%{transform:translateY(6px)}}
+.sc-hint svg{width:18px;height:18px}
+.lp-note{background:#060100;padding:68px 28px;text-align:center;border-top:1px solid rgba(245,200,66,.06);display:flex;flex-direction:column;align-items:center}
+.note-ico{font-size:1.5rem;margin-bottom:18px;opacity:.6}
+.note-from{font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,200,66,.36);margin-bottom:20px;font-weight:500}
+.note-txt{font-family:var(--dp);font-size:clamp(1.05rem,3.8vw,1.42rem);color:rgba(255,248,230,.86);line-height:1.88;max-width:34ch;font-style:italic}
+.note-txt strong{color:var(--petal);font-style:normal;font-weight:600}
+.note-txt em{color:#FFE888}
+.note-rule{width:42px;height:1.5px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.32),transparent);margin:30px auto;border-radius:99px}
+.note-sig{font-size:.84rem;color:rgba(255,248,220,.32);line-height:1.72}
+.note-sig strong{color:rgba(245,200,66,.52);font-weight:500}
+.lp-priv{background:linear-gradient(160deg,#040A01 0%,#060200 100%);padding:68px 28px;text-align:center;border-top:1px solid rgba(74,122,18,.1);display:flex;flex-direction:column;align-items:center}
+.priv-sh{width:52px;height:52px;background:rgba(74,122,18,.09);border:1px solid rgba(74,122,18,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.priv-sh svg{width:22px;height:22px;stroke:rgba(192,221,151,.62);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.priv-h{font-family:var(--dp);font-size:clamp(1.5rem,5.5vw,2.2rem);color:#EAF3DE;line-height:1.1;margin-bottom:14px}
+.priv-h em{color:var(--lf-m);font-style:italic}
+.priv-p{font-size:.87rem;color:rgba(234,243,222,.45);line-height:1.88;max-width:34ch;margin:0 auto 22px}
+.priv-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:6px}
+.ptag{background:rgba(74,122,18,.09);border:1px solid rgba(74,122,18,.18);border-radius:99px;padding:7px 14px;font-size:.74rem;color:rgba(192,221,151,.76);font-weight:500}
+.lp-enter{background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(245,200,66,.07) 0%,transparent 70%),linear-gradient(170deg,#110500 0%,#1A0A02 55%,#0A0300 100%);padding:68px 28px 90px;text-align:center;border-top:1px solid rgba(245,200,66,.06);display:flex;flex-direction:column;align-items:center;min-height:90svh;justify-content:center}
+.ent-seed{width:70px;height:70px;margin:0 auto 22px;animation:lf 3.2s ease-in-out infinite}
+.ent-h{font-family:var(--dp);font-size:clamp(1.7rem,6vw,2.6rem);color:var(--petal);line-height:1.08;margin-bottom:8px}
+.ent-h em{color:#FFE888;font-style:italic}
+.ent-sub{font-size:.88rem;color:rgba(255,248,220,.42);line-height:1.75;max-width:26ch;margin:0 auto 32px}
+.name-card{background:rgba(255,255,255,.025);border:1px solid rgba(245,200,66,.1);border-radius:var(--r-xl);padding:26px 20px 20px;width:100%;max-width:330px}
+.name-lbl{display:block;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,200,66,.38);text-align:left;margin-bottom:10px}
+.name-inp{width:100%;padding:13px 18px;border:1.5px solid rgba(245,200,66,.16);border-radius:99px;background:rgba(255,255,255,.04);color:var(--petal);font-size:.96rem;outline:none;text-align:center;letter-spacing:.02em;caret-color:var(--petal);transition:border-color .2s,box-shadow .2s}
+.name-inp:focus{border-color:rgba(245,200,66,.42);box-shadow:0 0 0 4px rgba(245,200,66,.06)}
+.name-inp::placeholder{color:rgba(245,200,66,.2)}
+.ent-btn{display:block;width:100%;margin-top:11px;padding:13px 22px;background:linear-gradient(135deg,var(--petal-b),var(--petal-d),var(--petal));background-size:200%;color:var(--brn);border:none;border-radius:99px;font-size:.92rem;font-weight:600;letter-spacing:.02em;transition:background-position .4s,transform .18s,box-shadow .18s;box-shadow:0 6px 22px rgba(196,88,10,.3)}
+.ent-btn:hover{background-position:100%;transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,88,10,.4)}
+.ent-btn:active{transform:translateY(0)}
+.ent-skip{display:block;margin-top:13px;font-size:.72rem;color:rgba(245,200,66,.26);background:none;border:none;text-decoration:underline;text-underline-offset:3px;transition:color .18s}
+.ent-skip:hover{color:rgba(245,200,66,.48)}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--brn);flex-shrink:0;border-bottom:1px solid rgba(245,200,66,.1);position:sticky;top:0;z-index:50}
+.tb-l{display:flex;align-items:center;gap:9px}
+.tb-logo{width:30px;height:30px;flex-shrink:0}
+.tb-name{font-family:var(--dp);color:var(--petal);font-size:.96rem;line-height:1.1}
+.tb-sub{font-size:.64rem;color:rgba(245,200,66,.44);letter-spacing:.04em}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.pts-pill{display:flex;align-items:center;gap:5px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.18);border-radius:99px;padding:5px 12px}
+.pts-pill .pl{font-size:.68rem;color:rgba(245,200,66,.52)}
+.pts-pill .pv{font-size:.98rem;font-weight:600;color:#FFE060}
+.help-btn{display:flex;align-items:center;justify-content:center;width:30px;height:30px;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.18);border-radius:50%;cursor:pointer;color:rgba(245,200,66,.6);font-size:.85rem;font-weight:700;transition:background .18s,color .18s;flex-shrink:0}
+.help-btn:hover{background:rgba(245,200,66,.18);color:var(--petal)}
+.logout-btn{display:flex;align-items:center;gap:5px;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.18);border-radius:99px;padding:5px 11px;font-size:.7rem;font-weight:500;color:rgba(245,200,66,.6);cursor:pointer;transition:background .18s,color .18s}
+.logout-btn:hover{background:rgba(200,50,50,.18);border-color:rgba(255,100,100,.3);color:rgba(255,160,160,.9)}
+.logout-btn svg{width:13px;height:13px}
+.main{flex:1;overflow:hidden;position:relative}
+.view{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;display:none;padding-bottom:calc(var(--nav-h) + var(--safe-b) + 8px)}
+.view.on{display:block}
+.bnav{display:flex;background:var(--brn);border-top:1px solid rgba(245,200,66,.1);padding:0 0 var(--safe-b);flex-shrink:0;height:calc(var(--nav-h) + var(--safe-b))}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:5px 0;border:none;background:none;color:rgba(245,200,66,.32);transition:color var(--ease)}
+.ni.on{color:var(--petal)}
+.ni svg{width:18px;height:18px}
+.ni span{font-size:.47rem;font-weight:500;text-transform:uppercase;letter-spacing:.02em}
+.wb{background:linear-gradient(140deg,var(--brn) 0%,var(--brn-m) 100%);padding:24px 16px 20px;position:relative;overflow:hidden}
+.wb::before{content:'';position:absolute;top:-55px;right:-55px;width:190px;height:190px;border-radius:50%;background:rgba(245,200,66,.055);pointer-events:none}
+.wb-tag{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,200,66,.44);margin-bottom:4px;font-weight:500}
+.wb-who{font-size:.8rem;color:rgba(245,200,66,.58);margin-bottom:3px}
+.wb-h{font-family:var(--dp);font-size:1.55rem;color:var(--petal);line-height:1.1;margin-bottom:7px}
+.wb-h em{color:#FFE888;font-style:italic}
+.wb-p{font-size:.82rem;color:rgba(255,248,220,.68);line-height:1.78;max-width:36ch}
+.wb-bs{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+.wb-b{background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.18);border-radius:99px;padding:4px 11px;font-size:.68rem;color:var(--petal);font-weight:500}
+.expl{background:var(--cr-w);border:1px solid var(--bdr);border-left:3px solid var(--petal);border-radius:0 var(--r) var(--r) 0;padding:12px 14px;margin-bottom:12px}
+.expl-t{font-size:.7rem;font-weight:500;color:var(--brn-m);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.expl p{font-size:.81rem;color:var(--txt-mu);line-height:1.72}
+.expl p+p{margin-top:5px}
+.card{background:#fff;border:1px solid var(--bdr-s);border-radius:var(--r);padding:14px 15px;margin-bottom:11px;box-shadow:var(--sh)}
+.card-w{background:var(--cr-s);border:1px solid var(--bdr);border-radius:var(--r);padding:14px 15px;margin-bottom:11px}
+.card-gr{background:var(--lf-s);border:1px solid var(--lf-m);border-radius:var(--r);padding:14px 15px;margin-bottom:11px}
+.card-dk{background:linear-gradient(135deg,var(--brn),var(--brn-m));border-radius:var(--r);padding:14px 15px;margin-bottom:11px;position:relative;overflow:hidden}
+.ch{font-family:var(--dp);font-size:1.1rem;color:var(--brn);margin-bottom:3px}
+.cs{font-size:.82rem;font-weight:500;color:var(--txt-m);margin-bottom:8px}
+.mu{color:var(--txt-mu);font-size:.8rem;line-height:1.65}
+.sec{padding:13px 13px 2px}
+.div{height:1px;background:var(--bdr-s);margin:9px 0}
+.btw{display:flex;align-items:center;justify-content:space-between}
+.btn-p{background:var(--brn);color:var(--petal);border:none;border-radius:99px;padding:10px 20px;font-size:.86rem;font-weight:500;transition:var(--ease)}
+.btn-p:hover{background:var(--brn-m);transform:translateY(-1px)}
+.btn-s{background:var(--cr-s);color:var(--txt-m);border:1px solid var(--bdr);border-radius:99px;padding:9px 17px;font-size:.86rem;font-weight:500;transition:var(--ease)}
+.btn-s:hover{background:var(--cr-w);border-color:var(--petal-d)}
+.btn-g{background:var(--leaf);color:#fff;border:none;border-radius:99px;padding:10px 20px;font-size:.86rem;font-weight:500;transition:var(--ease)}
+.btn-g:hover{background:var(--stem)}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.mp{border:1px solid var(--bdr);border-radius:99px;padding:6px 13px;font-size:.78rem;background:var(--cr-s);color:var(--txt-m);transition:var(--ease)}
+.mp.on{background:var(--petal);color:var(--brn);border-color:var(--petal-d);font-weight:500}
+.cp{border:1px solid var(--bdr);border-radius:99px;padding:6px 13px;font-size:.78rem;background:#fff;color:var(--txt-m);transition:var(--ease)}
+.cp.ck{background:var(--lf-s);color:var(--stem);border-color:var(--lf-m);font-weight:500}
+.lf{display:flex;flex-direction:column;gap:11px}
+.lf label{font-size:.74rem;font-weight:500;color:var(--txt-m);display:block;margin-bottom:4px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+input[type=text],input[type=date],input[type=password],select,textarea{width:100%;padding:9px 12px;border:1px solid var(--bdr);border-radius:var(--r);background:var(--cr-s);color:var(--txt);font-size:.86rem;outline:none;transition:border-color var(--ease)}
+input:focus,select:focus,textarea:focus{border-color:var(--petal-d)}
+textarea{min-height:84px;resize:vertical;line-height:1.6}
+.tw{position:relative;display:inline-block}
+.toast{position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:var(--brn);color:var(--petal);font-size:.74rem;font-weight:500;padding:6px 13px;border-radius:99px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .3s,bottom .3s;z-index:60}
+.toast.on{opacity:1;bottom:calc(100% + 13px)}
+.pbar{height:8px;background:rgba(61,31,0,.07);border-radius:99px;overflow:hidden;margin:10px 0 5px}
+.pfill{height:100%;background:linear-gradient(90deg,var(--leaf),var(--petal-d));border-radius:99px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.pmeta{display:flex;justify-content:space-between;font-size:.7rem;color:var(--txt-h)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:11px}
+.sb{background:#fff;border:1px solid var(--bdr-s);border-radius:var(--r);padding:10px 5px;text-align:center;box-shadow:var(--sh)}
+.sv{font-family:var(--dp);font-size:1.45rem;color:var(--brn)}
+.sl{font-size:.62rem;color:var(--txt-h);margin-top:1px;text-transform:uppercase;letter-spacing:.04em}
+.ec{background:var(--cr-s);border:1px solid var(--bdr-s);border-radius:var(--r);padding:11px 13px;margin-bottom:8px}
+.et{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.eb{font-size:.68rem;font-weight:500;background:var(--petal-lt);color:var(--brn-m);border-radius:99px;padding:3px 9px}
+@keyframes petalIn{from{transform:scale(0) rotate(var(--ra));opacity:0}to{transform:scale(1) rotate(var(--ra));opacity:1}}
+.sf-stage{display:flex;flex-direction:column;align-items:center;padding:6px 0 14px}
+.sf-lbl{font-family:var(--dp);font-size:1.2rem;color:var(--brn);margin-top:9px;text-align:center}
+.sf-desc{font-size:.79rem;color:var(--txt-mu);text-align:center;margin-top:3px;max-width:26ch;line-height:1.6}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:11px}
+.si{background:#fff;border:1px solid var(--bdr-s);border-radius:var(--r);padding:12px 9px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:var(--sh);transition:transform var(--ease),box-shadow var(--ease)}
+.si:hover{transform:translateY(-2px);box-shadow:var(--sh-m)}
+.si.owned{background:var(--lf-s);border-color:var(--lf-m)}
+.si-ico{font-size:1.75rem;margin-bottom:2px}
+.si-name{font-size:.76rem;font-weight:500;color:var(--brn)}
+.si-cost{font-size:.69rem;color:var(--petal-d);font-weight:600}
+.si-desc{font-size:.66rem;color:var(--txt-mu);line-height:1.4;margin:2px 0 4px}
+.si-btn{border:none;border-radius:99px;padding:5px 12px;font-size:.7rem;font-weight:500;transition:var(--ease);margin-top:auto}
+.si-buy{background:var(--petal);color:var(--brn)}.si-buy:hover{background:var(--petal-d);color:#fff}
+.si-lck{background:rgba(61,31,0,.05);color:var(--txt-h);cursor:default}
+.si-got{background:var(--leaf);color:#fff;cursor:default}
+.b-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:6px 0 14px}
+.borb{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,var(--petal-sf) 0%,var(--petal) 65%,var(--petal-b) 100%);display:flex;align-items:center;justify-content:center;font-family:var(--dp);font-size:1rem;color:var(--brn);transition:transform 4s ease-in-out,background 4s ease-in-out,box-shadow 4s ease-in-out;box-shadow:0 0 0 8px rgba(245,200,66,.1),0 0 0 16px rgba(245,200,66,.05)}
+.borb.inh{transform:scale(1.2);background:radial-gradient(circle,#FFFCE0 0%,#FFD860 55%,#E89800 100%);box-shadow:0 0 0 12px rgba(245,200,66,.16),0 0 38px rgba(232,160,0,.2)}
+.borb.exh{transform:scale(.84);background:radial-gradient(circle,var(--petal-wm) 0%,#F0B820 60%,#C07800 100%);box-shadow:0 0 0 4px rgba(245,200,66,.07)}
+.b-ph{font-size:.85rem;color:var(--txt-mu);min-height:20px;text-align:center;line-height:1.5}
+.b-cnt{font-size:.72rem;color:var(--petal-d);font-weight:500}
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:11px;margin-top:11px}
+.fcw{height:202px;perspective:900px;cursor:pointer}
+.fci{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.fcw.flip .fci{transform:rotateY(180deg)}
+.fcf{position:absolute;inset:0;border-radius:var(--r-lg);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:13px 11px;border:1px solid var(--bdr-s)}
+.fc-fr{background:#fff;box-shadow:var(--sh)}
+.fc-bk{background:linear-gradient(155deg,var(--cr-w),var(--petal-lt));border-color:var(--bdr);transform:rotateY(180deg);justify-content:flex-start}
+.fc-ico{font-size:2.5rem;margin-bottom:7px}
+.fc-nm{font-family:var(--dp);font-size:.88rem;color:var(--brn);text-align:center;line-height:1.2}
+.fc-md{font-size:.69rem;color:var(--txt-mu);margin-top:3px}
+.fc-ht{font-size:.64rem;color:var(--txt-h);margin-top:8px}
+.fc-ft{font-size:.72rem;color:var(--txt-m);line-height:1.65;text-align:center;margin-bottom:7px}
+.fc-qt{font-size:.71rem;font-family:var(--dp);font-style:italic;color:var(--petal-b);line-height:1.6;text-align:center;border-top:1px solid var(--bdr);padding-top:7px;margin-top:auto;width:100%}
+.bg{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:11px;margin-top:11px}
+.bc{background:#fff;border:1px solid var(--bdr-s);border-radius:var(--r);padding:13px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:6px;transition:transform var(--ease),box-shadow var(--ease)}
+.bc:hover{transform:translateY(-2px);box-shadow:var(--sh-m)}
+.bc-hd{display:flex;gap:9px;align-items:flex-start}
+.bc-sp{width:5px;height:48px;border-radius:3px;flex-shrink:0;margin-top:2px}
+.bc-ti{font-family:var(--dp);font-size:.88rem;color:var(--brn);line-height:1.3}
+.bc-au{font-size:.71rem;color:var(--txt-mu)}
+.bc-ls{font-size:.74rem;color:var(--txt-m);line-height:1.62;font-style:italic;padding:7px 9px;background:var(--cr-s);border-radius:var(--r);border-left:3px solid var(--petal)}
+.bc-pt{font-size:.69rem;font-weight:500;color:var(--petal-d);background:var(--petal-lt);border-radius:99px;padding:2px 9px;display:inline-block;width:fit-content}
+.bc-btn{border:1px solid var(--bdr);background:none;border-radius:99px;padding:6px 13px;font-size:.74rem;transition:var(--ease);margin-top:auto;color:var(--txt-m)}
+.bc-btn:hover:not(.done){background:var(--cr-w);border-color:var(--petal-d);color:var(--brn)}
+.bc-btn.done{background:var(--lf-s);color:var(--stem);border-color:var(--lf-m);cursor:default}
+.tdisp{font-family:var(--dp);font-size:3rem;color:var(--brn);text-align:center;padding:10px 0 6px;letter-spacing:.04em}
+.trow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
+.tb{border:1px solid var(--bdr);border-radius:99px;padding:7px 14px;font-size:.78rem;background:var(--cr-s);color:var(--txt-m);transition:var(--ease)}
+.tb:hover,.tb.sel{background:var(--petal);color:var(--brn);border-color:var(--petal-d);font-weight:500}
+.mrow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
+.mb{border:1px solid var(--bdr);border-radius:99px;padding:6px 13px;font-size:.78rem;background:var(--cr-s);color:var(--txt-m);transition:var(--ease)}
+.mb:hover,.mb.on{background:var(--petal);color:var(--brn);border-color:var(--petal-d);font-weight:500}
+.mfrm{width:100%;aspect-ratio:16/9;border:none;border-radius:var(--r)}
+.vg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:9px;margin-top:11px}
+.vc{border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform var(--ease),box-shadow var(--ease);border:2px solid transparent;background:var(--brn)}
+.vc:hover{transform:translateY(-2px);box-shadow:var(--sh-m)}
+.vc.pl{border-color:var(--petal)}
+.vt{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.vplay{width:38px;height:38px;border-radius:50%;background:rgba(245,200,66,.9);display:flex;align-items:center;justify-content:center}
+.vplay svg{width:15px;height:15px;margin-left:3px}
+.vi{padding:9px 10px 10px}
+.vn{font-size:.76rem;font-weight:500;color:var(--petal-sf);line-height:1.35;margin-bottom:3px}
+.vd{font-size:.67rem;color:rgba(245,200,66,.42)}
+.ai-wrap{background:linear-gradient(135deg,var(--brn),#5C2A08);border-radius:var(--r);padding:15px;margin-bottom:11px;position:relative;overflow:hidden}
+.ai-wrap::after{content:'✦';position:absolute;right:13px;top:11px;font-size:1.1rem;color:rgba(245,200,66,.22);pointer-events:none}
+.ai-tag{font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(245,200,66,.46);margin-bottom:5px;font-weight:500}
+.ai-txt{font-size:.86rem;color:var(--petal-sf);line-height:1.8;font-family:var(--dp);font-style:italic}
+.ai-txt.idle{font-style:normal;font-size:.78rem;color:rgba(255,248,220,.38)}
+.dot-row{display:flex;gap:5px;align-items:center;margin-bottom:5px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--petal);animation:dp 1.3s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.18s}.dot:nth-child(3){animation-delay:.36s}
+@keyframes dp{0%,80%,100%{transform:scale(.7);opacity:.3}40%{transform:scale(1.1);opacity:1}}
+.sf-card{background:#fff;border:1px solid var(--bdr-s);border-radius:var(--r-lg);padding:16px 14px;margin-bottom:11px;box-shadow:var(--sh);display:flex;align-items:center;gap:13px}
+.sf-info{flex:1}
+.sf-sn{font-family:var(--dp);font-size:1.05rem;color:var(--brn);margin-bottom:4px}
+.sf-sd{font-size:.78rem;color:var(--txt-mu);line-height:1.6;margin-bottom:7px}
+.sf-go{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:500;color:var(--petal-b);background:var(--petal-lt);border:1px solid var(--bdr);border-radius:99px;padding:5px 12px;transition:var(--ease)}
+.sf-go:hover{background:var(--petal);color:var(--brn)}
+.qcard{background:linear-gradient(135deg,var(--cr-w),var(--petal-lt));border:1px solid var(--bdr);border-radius:var(--r);padding:14px;margin-bottom:11px}
+.qm{font-family:var(--dp);font-size:2.2rem;color:var(--petal);line-height:.72;margin-bottom:3px}
+.qt{font-family:var(--dp);font-size:.92rem;color:var(--brn);line-height:1.62;font-style:italic}
+.qa{font-size:.68rem;color:var(--txt-mu);margin-top:7px}
+.rl{font-size:.68rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--txt-h);margin-bottom:8px}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
+.rc{background:#fff;border:1px solid var(--bdr-s);border-radius:var(--r);padding:13px 11px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:4px;transition:transform var(--ease),box-shadow var(--ease);border:none;text-align:left;cursor:pointer}
+.rc:hover,.rc:active{transform:translateY(-2px);box-shadow:var(--sh-m)}
+.ri{font-size:1.5rem;margin-bottom:1px}
+.rn{font-size:.84rem;font-weight:500;color:var(--brn)}
+.rd{font-size:.7rem;color:var(--txt-mu);line-height:1.5}
+.rg-b{font-size:.63rem;font-weight:500;background:var(--lf-s);color:var(--stem);border-radius:99px;padding:2px 8px;display:inline-block;width:fit-content;margin-top:1px}
+.ra-b{font-size:.63rem;font-weight:500;background:var(--petal-lt);color:var(--brn-m);border-radius:99px;padding:2px 8px;display:inline-block;width:fit-content;margin-top:1px}
+.modal-overlay{position:fixed;inset:0;z-index:600;background:rgba(10,3,0,.85);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--cr);border:1px solid var(--bdr);border-radius:var(--r-xl);padding:28px 24px 22px;width:100%;max-width:320px;box-shadow:0 16px 48px rgba(0,0,0,.4);text-align:center}
+.modal-ico{font-size:2rem;margin-bottom:12px}
+.modal-h{font-family:var(--dp);font-size:1.2rem;color:var(--brn);margin-bottom:6px}
+.modal-p{font-size:.82rem;color:var(--txt-mu);line-height:1.7;margin-bottom:20px}
+.modal-btns{display:flex;flex-direction:column;gap:9px}
+.modal-confirm{background:#C0392B;color:#fff;border:none;border-radius:99px;padding:11px 20px;font-size:.88rem;font-weight:500;cursor:pointer;transition:.18s}
+.modal-confirm:hover{background:#a93226}
+.modal-cancel{background:var(--cr-s);color:var(--txt-m);border:1px solid var(--bdr);border-radius:99px;padding:10px 20px;font-size:.88rem;font-weight:500;cursor:pointer;transition:.18s}
+.modal-cancel:hover{background:var(--cr-w)}
+.navguide-overlay{position:fixed;inset:0;z-index:600;background:rgba(10,3,0,.88);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.navguide-overlay.open{opacity:1;pointer-events:all}
+.navguide-sheet{background:var(--cr);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:20px 18px 32px;width:100%;max-width:480px;box-shadow:0 -8px 32px rgba(0,0,0,.25);max-height:88vh;overflow-y:auto;transform:translateY(20px);transition:transform .25s ease}
+.navguide-overlay.open .navguide-sheet{transform:translateY(0)}
+.sheet-handle{width:36px;height:4px;background:var(--bdr);border-radius:99px;margin:0 auto 18px}
+.sheet-h{font-family:var(--dp);font-size:1.15rem;color:var(--brn);margin-bottom:4px}
+.sheet-sub{font-size:.79rem;color:var(--txt-mu);margin-bottom:16px}
+.nav-guide-row{display:flex;align-items:flex-start;gap:13px;padding:10px 0;border-bottom:1px solid var(--bdr-s)}
+.nav-guide-row:last-child{border-bottom:none}
+.ng-icon{width:40px;height:40px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+.ng-name{font-size:.88rem;font-weight:500;color:var(--brn);margin-bottom:2px}
+.ng-desc{font-size:.75rem;color:var(--txt-mu);line-height:1.55}
+.ng-pts{font-size:.68rem;font-weight:500;background:var(--lf-s);color:var(--stem);border-radius:99px;padding:2px 8px;display:inline-block;margin-top:4px}
+.ng-info{font-size:.68rem;font-weight:500;background:var(--petal-lt);color:var(--brn-m);border-radius:99px;padding:2px 8px;display:inline-block;margin-top:4px}
+.sheet-tip{background:var(--cr-w);border:1px solid var(--bdr);border-left:3px solid var(--petal);border-radius:0 var(--r) var(--r) 0;padding:10px 13px;margin-top:14px;font-size:.79rem;color:var(--txt-mu);line-height:1.65}
+@media(max-width:360px){.rg{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.f2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
 
-          
+<div id="landing">
+  <div class="fp-bg" id="fp-bg"></div>
+  <div class="lp-wrap">
+    <section class="lp-hero">
+      <div class="lp-sf">
+        <svg viewBox="0 0 148 162" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(74,74)">
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#F5C842" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#E8B030" transform="rotate(36)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#F5C842" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#E8B030" transform="rotate(108)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#F5C842" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#E8B030" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#F5C842" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#E8B030" transform="rotate(252)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#F5C842" transform="rotate(288)"/>
+            <ellipse cx="0" cy="-57" rx="17" ry="34" fill="#E8B030" transform="rotate(324)"/>
+            <circle r="36" fill="#C4580A"/>
+            <circle r="25" fill="#3D1F00"/>
+            <circle cx="0" cy="-15" r="2.4" fill="#5C3A0A"/><circle cx="11" cy="-9" r="2.4" fill="#5C3A0A"/>
+            <circle cx="15" cy="2" r="2.4" fill="#5C3A0A"/><circle cx="10" cy="13" r="2.4" fill="#5C3A0A"/>
+            <circle cx="-1" cy="16" r="2.4" fill="#5C3A0A"/><circle cx="-11" cy="10" r="2.4" fill="#5C3A0A"/>
+            <circle cx="-15" cy="-1" r="2.4" fill="#5C3A0A"/><circle cx="-10" cy="-12" r="2.4" fill="#5C3A0A"/>
+          </g>
+          <line x1="74" y1="122" x2="74" y2="158" stroke="#4A7A12" stroke-width="5.5" stroke-linecap="round"/>
+          <ellipse cx="57" cy="146" rx="18" ry="8" fill="#5A8A1A" transform="rotate(-26 57 146)"/>
+          <ellipse cx="91" cy="153" rx="16" ry="7" fill="#4A7A12" transform="rotate(22 91 153)"/>
+        </svg>
+      </div>
+      <p class="lp-eye">Sunflower Sanctuary</p>
+      <h1 class="lp-h1">Girl,<br/><em>Breathe.</em></h1>
+      <p class="lp-tag">A living world that blooms with every breath you take, every word you write, every moment you choose yourself.</p>
+      <div class="sc-hint">
+        <span>scroll</span>
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </div>
+    </section>
+
+    <section class="lp-note">
+      <div class="note-ico">🌿</div>
+      <p class="note-from">A note from the creator</p>
+      <p class="note-txt">
+        I built this for <strong>you</strong> —<br/>
+        for the woman who pours herself into everyone else<br/>
+        and forgets to save a single drop for herself.<br/><br/>
+        This is your <em>private garden.</em><br/>
+        A place where self-care is not a luxury —<br/>
+        it is the whole point.<br/>
+        Where self-love is not something you earn —<br/>
+        it is what you already deserve,<br/>
+        fully and without condition.<br/><br/>
+        Whether you come here in the quiet of the morning,<br/>
+        or in the middle of a hard day when everything feels heavy —<br/>
+        <strong>this space holds you.</strong><br/><br/>
+        No performance. No judgment.<br/>
+        Just you, your breath,<br/>
+        and a sunflower growing <em>exactly as fast as you do.</em>
+      </p>
+      <div class="note-rule"></div>
+      <p class="note-sig">Made with love for those who are healing,<br/>for those who are growing, and for those<br/>who simply need a place that is <strong>entirely their own.</strong></p>
+    </section>
+
+    <section class="lp-priv">
+      <div class="priv-sh"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h2 class="priv-h">Your privacy<br/>is <em>sacred</em> here.</h2>
+      <p class="priv-p">Everything you write stays here. Your journal, reflections, moods, All on your device only. Nothing sent anywhere. No one else ever sees what you write.</p>
+      <div class="priv-tags">
+        <span class="ptag">✦ No account needed</span>
+        <span class="ptag">✦ No data collected</span>
+        <span class="ptag">✦ Lives on your device only</span>
+        <span class="ptag">✦ No ads. Ever.</span>
+        <span class="ptag">✦ Write freely</span>
+        <span class="ptag">✦ No sign-up</span>
+      </div>
+    </section>
+
+    <section class="lp-enter">
+      <div class="ent-seed">
+        <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="36" cy="60" rx="23" ry="9" fill="#6B3A0A" opacity=".28"/>
+          <ellipse cx="36" cy="55" rx="10" ry="15" fill="#5C3A0A"/>
+          <ellipse cx="36" cy="51" rx="7" ry="11" fill="#3D1F00"/>
+          <line x1="36" y1="40" x2="36" y2="27" stroke="#4A7A12" stroke-width="2.8" stroke-linecap="round"/>
+          <ellipse cx="27" cy="33" rx="10" ry="4.5" fill="#5A8A1A" transform="rotate(-32 27 33)"/>
+          <ellipse cx="45" cy="28" rx="10" ry="4.5" fill="#4A7A12" transform="rotate(32 45 28)"/>
+        </svg>
+      </div>
+      <h2 class="ent-h">Ready to enter<br/><em>your garden?</em></h2>
+      <p class="ent-sub">Tell us your name and we'll greet you warmly every time you return.</p>
+      <div class="name-card">
+        <label class="name-lbl" for="name-inp">What shall we call you?</label>
+        <input type="text" id="name-inp" class="name-inp" placeholder="Your name..." maxlength="30" autocomplete="off" autocapitalize="words"/>
+        <button class="ent-btn" onclick="doEnter()">Enter my sanctuary</button>
+        <button class="ent-skip" onclick="doEnter(true)">I'll skip for now</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="shell" style="display:none">
+
+  <header class="topbar">
+    <div class="tb-l">
+      <svg class="tb-logo" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(15,15)">
+          <ellipse cx="0" cy="-8.5" rx="3.8" ry="7" fill="#F5C842" transform="rotate(0)"/>
+          <ellipse cx="0" cy="-8.5" rx="3.8" ry="7" fill="#E8B030" transform="rotate(60)"/>
+          <ellipse cx="0" cy="-8.5" rx="3.8" ry="7" fill="#F5C842" transform="rotate(120)"/>
+          <ellipse cx="0" cy="-8.5" rx="3.8" ry="7" fill="#E8B030" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-8.5" rx="3.8" ry="7" fill="#F5C842" transform="rotate(240)"/>
+          <ellipse cx="0" cy="-8.5" rx="3.8" ry="7" fill="#E8B030" transform="rotate(300)"/>
+          <circle r="6.5" fill="#C4580A"/><circle r="4.4" fill="#3D1F00"/>
+        </g>
+      </svg>
+      <div>
+        <div class="tb-name" id="tb-name">Girl, Breathe.</div>
+        <div class="tb-sub">Sunflower Sanctuary</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="pts-pill"><span class="pl">pts</span><span class="pv" id="pts-v">0</span></div>
+      <button class="help-btn" onclick="openNavGuide()" title="How to navigate">?</button>
+      <button class="logout-btn" onclick="openLogout()">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Log out
+      </button>
+    </div>
+  </header>
+
+  <div class="main">
+
+    <div class="view on" id="v-home">
+      <div class="wb">
+        <div class="wb-tag" id="h-tag">Your sanctuary</div>
+        <div class="wb-who" id="h-who"></div>
+        <div class="wb-h" id="h-name">Welcome,<br/><em>beautiful soul.</em></div>
+        <div class="wb-p" id="h-msg">Your garden is waiting. Every room here is yours.</div>
+        <div class="wb-bs">
+          <span class="wb-b" id="h-streak">0 day streak</span>
+          <span class="wb-b" id="h-pts">0 pts</span>
+          <span class="wb-b" id="h-stage">Seed — Stage 1</span>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sf-card">
+          <svg id="h-sf" width="72" height="82" viewBox="0 0 72 82" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+            <line x1="36" y1="52" x2="36" y2="80" stroke="#2E5A08" stroke-width="3.5" stroke-linecap="round"/>
+            <g id="h-pg"></g>
+            <circle id="h-or" cx="36" cy="36" r="0" fill="#C4580A" style="transition:r .5s ease"/>
+            <circle id="h-ct" cx="36" cy="36" r="0" fill="#3D1F00" style="transition:r .5s ease"/>
+            <g id="h-seed">
+              <ellipse cx="36" cy="38" rx="9" ry="13" fill="#5C3A0A"/>
+              <ellipse cx="36" cy="35" rx="6" ry="9" fill="#3D1F00"/>
+            </g>
+          </svg>
+          <div class="sf-info">
+            <div class="sf-sn" id="h-sn">Seed</div>
+            <div class="sf-sd" id="h-sd">A tiny seed full of infinite possibility.</div>
+            <button class="sf-go" onclick="goRoom('garden',this)">Open garden →</button>
+          </div>
+        </div>
+        <div class="qcard">
+          <div class="qm">"</div>
+          <div class="qt" id="q-txt">Like a sunflower, turn gently toward the light.</div>
+          <div class="qa">— Daily seed of wisdom</div>
+        </div>
+        <div style="background:var(--cr-w);border:1px solid var(--bdr);border-left:3px solid var(--petal);border-radius:0 var(--r) var(--r) 0;padding:11px 14px;margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div>
+            <div style="font-size:.72rem;font-weight:500;color:var(--brn-m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Getting around</div>
+            <div style="font-size:.79rem;color:var(--txt-mu);line-height:1.6">Use the bar below to visit any room. Tap <strong style="color:var(--brn)">Home 🏠</strong> to return here any time.</div>
+          </div>
+          <button onclick="openNavGuide()" style="flex-shrink:0;background:var(--petal);color:var(--brn);border:none;border-radius:99px;padding:6px 13px;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap">See all rooms</button>
+        </div>
+        <div class="rl">Your rooms</div>
+        <div class="rg">
+          <button class="rc" onclick="goRoom('garden',this)"><div class="ri">🌻</div><div class="rn">Garden</div><div class="rd">Grow your sunflower. Unlock tools.</div><span class="ra-b">Earn + spend pts</span></button>
+          <button class="rc" onclick="goRoom('breathe',this)"><div class="ri">🌬️</div><div class="rn">Breathe</div><div class="rd">Follow the orb. Inhale calm.</div><span class="rg-b">+1 pt per session</span></button>
+          <button class="rc" onclick="goRoom('log',this)"><div class="ri">📖</div><div class="rn">Daily log</div><div class="rd">Write your meditation and mood.</div><span class="rg-b">+2 pts per entry</span></button>
+          <button class="rc" onclick="goRoom('journal',this)"><div class="ri">🌿</div><div class="rn">Journal</div><div class="rd">Weekly reflection + AI message.</div><span class="rg-b">+3 pts + AI</span></button>
+          <button class="rc" onclick="goRoom('flowers',this)"><div class="ri">🌸</div><div class="rn">Flower cards</div><div class="rd">Flip for facts + messages.</div><span class="ra-b">8 cards</span></button>
+          <button class="rc" onclick="goRoom('reading',this)"><div class="ri">📚</div><div class="rn">Reading room</div><div class="rd">10 books for women growing.</div><span class="rg-b">+4 pts/book</span></button>
+          <button class="rc" onclick="goRoom('med',this)" style="grid-column:1/-1"><div class="ri">🎵</div><div class="rn">Meditation room</div><div class="rd">Timer, ambient sounds, guided videos. Your sacred space.</div><span class="rg-b">+pts on completion</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="v-garden">
+      <div class="wb">
+        <div class="wb-tag">The garden</div>
+        <div class="wb-who" id="g-who"></div>
+        <div class="wb-h">Where every breath<br/><em>becomes a petal.</em></div>
+        <div class="wb-p">Your sunflower starts as a seed. Earn points across every room, then spend them here to unlock gardening materials. Each unlock draws a new petal — all ten = a fully bloomed Giant Golden Sunflower.</div>
+        <div class="wb-bs"><span class="wb-b" id="g-stage">Stage 1 — Seed</span><span class="wb-b" id="g-pts">0 pts available</span></div>
+      </div>
+      <div class="sec">
+        <div class="expl">
+          <div class="expl-t">How the garden works</div>
+          <p>Your sunflower begins as a tiny seed. As you meditate, journal, breathe, and read — you earn points. Spend them below to unlock each gardening material.</p>
+          <p>Every item you unlock draws a new golden petal on your sunflower. She grows exactly as fast as you do.</p>
+        </div>
+        <div class="card">
+          <div class="sf-stage">
+            <svg id="sf-svg" width="210" height="220" viewBox="0 0 210 220" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="105" cy="210" rx="50" ry="11" fill="#6B3A0A" opacity=".22"/>
+              <line x1="105" y1="154" x2="105" y2="206" stroke="#2E5A08" stroke-width="5.5" stroke-linecap="round"/>
+              <g id="sf-lv" opacity="0" style="transition:opacity .6s ease">
+                <ellipse cx="86" cy="188" rx="20" ry="8" fill="#4A7A12" transform="rotate(-28 86 188)"/>
+                <ellipse cx="124" cy="196" rx="18" ry="7" fill="#4A7A12" transform="rotate(22 124 196)"/>
+              </g>
+              <g id="sf-pg"></g>
+              <circle id="sf-or" cx="105" cy="108" r="0" fill="#C4580A" style="transition:r .5s ease"/>
+              <circle id="sf-ct" cx="105" cy="108" r="0" fill="#3D1F00" style="transition:r .5s ease"/>
+              <g id="sf-sd-g" transform="translate(105,108)" style="transition:opacity .7s ease;opacity:0">
+                <circle cx="0" cy="-14" r="2.2" fill="#5C3A0A"/><circle cx="10" cy="-9" r="2.2" fill="#5C3A0A"/>
+                <circle cx="14" cy="1" r="2.2" fill="#5C3A0A"/><circle cx="10" cy="11" r="2.2" fill="#5C3A0A"/>
+                <circle cx="0" cy="14" r="2.2" fill="#5C3A0A"/><circle cx="-10" cy="11" r="2.2" fill="#5C3A0A"/>
+                <circle cx="-14" cy="1" r="2.2" fill="#5C3A0A"/><circle cx="-10" cy="-9" r="2.2" fill="#5C3A0A"/>
+              </g>
+              <g id="sf-seed-show">
+                <ellipse cx="105" cy="112" rx="11" ry="16" fill="#5C3A0A"/>
+                <ellipse cx="105" cy="108" rx="8" ry="12" fill="#3D1F00"/>
+                <line x1="105" y1="96" x2="105" y2="86" stroke="#4A7A12" stroke-width="2.5" stroke-linecap="round"/>
+                <ellipse cx="98" cy="90" rx="8" ry="4" fill="#5A8A1A" transform="rotate(-30 98 90)"/>
+                <ellipse cx="112" cy="87" rx="8" ry="4" fill="#4A7A12" transform="rotate(30 112 87)"/>
+              </g>
+            </svg>
+            <div class="sf-lbl" id="sf-lbl">Seed</div>
+            <div class="sf-desc" id="sf-dsc">Your journey begins here.</div>
+            <div style="width:100%;max-width:270px;margin:4px auto 0">
+              <div class="pbar"><div class="pfill" id="sf-pf" style="width:0%"></div></div>
+              <div class="pmeta"><span id="sf-pl">0 / 5 pts</span><span id="sf-sn">Stage 1 of 6</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-dk" style="margin-bottom:11px;position:relative">
+          <div style="font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(245,200,66,.42);margin-bottom:5px;font-weight:500">Garden shop</div>
+          <div style="font-family:var(--dp);font-size:1.15rem;color:var(--petal);margin-bottom:6px">Welcome to the<br/><em style="color:#FFE888">garden shop.</em></div>
+          <div style="font-size:.81rem;color:rgba(255,248,220,.62);line-height:1.72">Spend your earned points to unlock each gardening material below. Every item adds a real petal to your sunflower.</div>
+          <div class="tw" style="margin-top:0;display:block"><div class="toast" id="shop-toast"></div></div>
+        </div>
+        <div class="shop-grid" id="shop-g"></div>
+        <div class="card" style="margin-top:11px">
+          <div class="ch">Earn points everywhere</div>
+          <div class="mu" style="margin-bottom:9px">Visit any room to earn points to spend here.</div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0;border-bottom:1px solid var(--bdr-s)"><span>5-min meditation</span><b style="color:var(--petal-d)">+1</b></div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0;border-bottom:1px solid var(--bdr-s)"><span>10-min meditation</span><b style="color:var(--petal-d)">+2</b></div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0;border-bottom:1px solid var(--bdr-s)"><span>20-min meditation</span><b style="color:var(--petal-d)">+3</b></div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0;border-bottom:1px solid var(--bdr-s)"><span>60-min meditation</span><b style="color:var(--petal-d)">+5</b></div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0;border-bottom:1px solid var(--bdr-s)"><span>Journal entry</span><b style="color:var(--petal-d)">+2</b></div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0;border-bottom:1px solid var(--bdr-s)"><span>Weekly reflection</span><b style="color:var(--petal-d)">+3</b></div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0;border-bottom:1px solid var(--bdr-s)"><span>Breathing session</span><b style="color:var(--petal-d)">+1</b></div>
+          <div class="btw" style="font-size:.81rem;padding:5px 0"><span>Book completed</span><b style="color:var(--petal-d)">+4</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="v-breathe">
+      <div class="wb">
+        <div class="wb-tag">Breathing room</div>
+        <div class="wb-who" id="br-who"></div>
+        <div class="wb-h">Slow down.<br/><em>You are safe here.</em></div>
+        <div class="wb-p">Your breath is your anchor. Follow the orb — inhale as it expands, exhale as it softens. Even two minutes here changes the whole energy of your day.</div>
+        <div class="wb-bs"><span class="wb-b">Each session = +1 pt</span><span class="wb-b">4-second rhythm</span></div>
+      </div>
+      <div class="sec">
+        <div class="card" style="text-align:center">
+          <div class="b-wrap">
+            <div class="borb" id="borb">Tap to begin</div>
+            <div class="b-ph" id="b-ph"></div>
+            <div class="b-cnt" id="b-cnt"></div>
+          </div>
+          <div class="btn-row" style="justify-content:center;margin-top:4px">
+            <button class="btn-p" onclick="startBreath()">Start breathing</button>
+            <button class="btn-s" onclick="stopBreath()">Stop</button>
+          </div>
+        </div>
+        <div class="expl">
+          <div class="expl-t">Why this works</div>
+          <p>Slow, rhythmic breathing activates your parasympathetic nervous system — the part of you that says "you are safe." Four seconds in, four seconds out is enough to shift your entire state.</p>
+        </div>
+        <div class="card-w">
+          <div class="cs">How are you feeling right now?</div>
+          <div class="pill-row" id="mood-r">
+            <button class="mp on" onclick="setMood(this,'Peaceful')">Peaceful</button>
+            <button class="mp" onclick="setMood(this,'Grateful')">Grateful</button>
+            <button class="mp" onclick="setMood(this,'Motivated')">Motivated</button>
+            <button class="mp" onclick="setMood(this,'Tired')">Tired</button>
+            <button class="mp" onclick="setMood(this,'Hopeful')">Hopeful</button>
+            <button class="mp" onclick="setMood(this,'Anxious')">Anxious</button>
+            <button class="mp" onclick="setMood(this,'Joyful')">Joyful</button>
+            <button class="mp" onclick="setMood(this,'Sad')">Sad</button>
+          </div>
+        </div>
+        <div class="card-w">
+          <div class="cs">Daily check-ins</div>
+          <div class="pill-row">
+            <button class="cp" onclick="this.classList.toggle('ck')">Drank water</button>
+            <button class="cp" onclick="this.classList.toggle('ck')">Stretched</button>
+            <button class="cp" onclick="this.classList.toggle('ck')">Gratitude moment</button>
+            <button class="cp" onclick="this.classList.toggle('ck')">Deep breath</button>
+            <button class="cp" onclick="this.classList.toggle('ck')">Self-kindness</button>
+            <button class="cp" onclick="this.classList.toggle('ck')">Screen break</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="v-log">
+      <div class="wb">
+        <div class="wb-tag">Daily log</div>
+        <div class="wb-who" id="lg-who"></div>
+        <div class="wb-h">Write it down.<br/><em>Let it bloom.</em></div>
+        <div class="wb-p">Your words are seeds. You don't need perfect sentences — just honest ones. Every entry you save grows your garden and earns you points.</div>
+        <div class="wb-bs"><span class="wb-b">Meditation pts + 2 bonus pts per entry</span></div>
+      </div>
+      <div class="sec">
+        <div class="card">
+          <div class="ch" style="margin-bottom:13px">Today's entry</div>
+          <div class="lf">
+            <div class="f2">
+              <div><label>Date</label><input type="date" id="ld"/></div>
+              <div><label>Length</label>
+                <select id="lm">
+                  <option value="5">5 minutes</option>
+                  <option value="10">10 minutes</option>
+                  <option value="20">20 minutes</option>
+                  <option value="60">1 hour</option>
+                </select>
+              </div>
+            </div>
+            <div><label>How are you feeling?</label><input type="text" id="lmo" placeholder="Peaceful, grateful, tired..."/></div>
+            <div><label>One gratitude</label><input type="text" id="lgr" placeholder="Today I am thankful for..."/></div>
+            <div><label>Your note</label><textarea id="lnt" placeholder="Write freely about your meditation, your day, what you are releasing..."></textarea></div>
+            <div class="tw">
+              <div class="toast" id="log-toast">Saved!</div>
+              <button class="btn-p" onclick="saveLog()">Save entry</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cs">Recent entries</div>
+          <div id="entries-l"><div class="mu">No entries yet. Your first log will appear here.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="v-journal">
+      <div class="wb">
+        <div class="wb-tag">Weekly journal</div>
+        <div class="wb-who" id="jn-who"></div>
+        <div class="wb-h">Reflect.<br/><em>Then grow deeper.</em></div>
+        <div class="wb-p">Once a week, pour yourself onto the page. Your AI garden companion reads your entries and writes you a personal growth message — just for you.</div>
+        <div class="wb-bs"><span class="wb-b">Reflection = +3 pts</span><span class="wb-b">AI message included</span></div>
+      </div>
+      <div class="sec">
+        <div class="stats">
+          <div class="sb"><div class="sv" id="j-se">0</div><div class="sl">Sessions</div></div>
+          <div class="sb"><div class="sv" id="j-mi">0</div><div class="sl">Minutes</div></div>
+          <div class="sb"><div class="sv" id="j-pt">0</div><div class="sl">Points</div></div>
+          <div class="sb"><div class="sv" id="j-rf">0</div><div class="sl">Reflections</div></div>
+        </div>
+        <div class="card">
+          <div class="cs">AI companion setup</div>
+          <div class="mu" style="margin-bottom:8px">Paste your Anthropic API key to unlock personal AI growth messages. Your key stays only in your browser — never sent elsewhere.</div>
+          <div style="display:flex;gap:8px;margin-bottom:6px">
+            <input type="password" id="api-k" placeholder="sk-ant-..." style="flex:1;font-size:.8rem"/>
+            <button class="btn-s" onclick="saveKey()" style="flex-shrink:0;white-space:nowrap">Save key</button>
+          </div>
+          <div id="key-ok" style="display:none;font-size:.73rem;color:var(--leaf)">✓ API key saved for this session</div>
+        </div>
+        <div class="ai-wrap">
+          <div class="ai-tag">Your AI garden companion</div>
+          <div class="ai-txt idle" id="ai-txt">Save a weekly reflection below and your companion will write you a personal growth message based on your entries.</div>
+        </div>
+        <div class="card-gr">
+          <div class="cs" style="color:var(--stem)">This week's reflection</div>
+          <textarea id="wref" style="background:transparent;border:none;outline:none;width:100%;min-height:112px;resize:vertical;font-size:.85rem;margin-top:7px;color:var(--txt);line-height:1.65" placeholder="What grounded me this week? What feelings came up? What do I want to grow in myself next week?"></textarea>
+          <div class="tw" style="margin-top:9px">
+            <div class="toast" id="ref-toast">+3 pts saved!</div>
+            <button class="btn-g" onclick="saveRef()">Save &amp; get my AI message</button>
+          </div>
+        </div>
+        <div class="card" id="past-c" style="display:none">
+          <div class="cs">Past reflections</div>
+          <div id="past-r"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="v-flowers">
+      <div class="wb">
+        <div class="wb-tag">Flower cards</div>
+        <div class="wb-h">Every flower<br/><em>has a story for you.</em></div>
+        <div class="wb-p">Tap any card to turn it over and discover a real botanical fact and a message grown just for your heart today.</div>
+      </div>
+      <div class="sec">
+        <div class="expl">
+          <div class="expl-t">How to use flower cards</div>
+          <p>Tap any flower to flip it. The front shows the flower's name and mood. The back reveals a botanical fact and a personal message written just for you. Tap again to flip back.</p>
+        </div>
+        <div class="fg" id="flower-g"></div>
+      </div>
+    </div>
+
+    <div class="view" id="v-reading">
+      <div class="wb">
+        <div class="wb-tag">Reading room</div>
+        <div class="wb-h">Let their words<br/><em>water your roots.</em></div>
+        <div class="wb-p">These books were chosen for women who are growing. Each one you complete earns +4 growth points and plants a knowledge bloom in your garden.</div>
+        <div class="wb-bs"><span class="wb-b">Each book = +4 pts</span></div>
+      </div>
+      <div class="sec">
+        <div class="expl">
+          <div class="expl-t">Reading room guide</div>
+          <p>Read at your own pace. When you finish a book, tap "Mark as read" to earn points. The key lesson on each card is a seed for your next meditation.</p>
+        </div>
+        <div class="bg" id="book-g"></div>
+      </div>
+    </div>
+
+    <div class="view" id="v-med">
+      <div class="wb">
+        <div class="wb-tag">Meditation room</div>
+        <div class="wb-h">This is your<br/><em>sacred space.</em></div>
+        <div class="wb-p">Set your timer, choose your sound or a guided video, and sink into stillness. Your garden grows with every minute you give to yourself.</div>
+        <div class="wb-bs"><span class="wb-b">Timer awards pts on completion</span></div>
+      </div>
+      <div class="sec">
+        <div class="expl">
+          <div class="expl-t">How to use this room</div>
+          <p>Choose a timer length, press Start, then pick a sound or guided video. When the timer completes, your meditation points are automatically added to your garden.</p>
+        </div>
+        <div class="card">
+          <div class="ch">Meditation timer</div>
+          <div class="tdisp" id="t-disp">00:00</div>
+          <div class="trow">
+            <button class="tb" onclick="setT(5,this)">5 min</button>
+            <button class="tb" onclick="setT(10,this)">10 min</button>
+            <button class="tb" onclick="setT(20,this)">20 min</button>
+            <button class="tb" onclick="setT(60,this)">60 min</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn-p" onclick="startT()">Start</button>
+            <button class="btn-s" onclick="resetT()">Reset</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch">Ambient sounds</div>
+          <div class="mrow">
+            <button class="mb on" onclick="playM('jfKfPfyJRdk',this)">✨ Ambient</button>
+            <button class="mb" onclick="playM('1ZYbU82GVz4',this)">🌧 Rain</button>
+            <button class="mb" onclick="playM('lFcSrYw-ARY',this)">🎹 Piano</button>
+            <button class="mb" onclick="playM('V-_O7nl0Ii0',this)">🌊 Ocean</button>
+            <button class="mb" onclick="playM('NHDin10EAFQ',this)">🌲 Forest</button>
+            <button class="mb" onclick="playM('y3EGFPsJ9_A',this)">🔮 Bowls</button>
+          </div>
+          <iframe id="m-frame" class="mfrm" src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?controls=1&rel=0" title="Meditation music" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="card">
+          <div class="ch">Guided meditations</div>
+          <div class="mu" style="margin-bottom:3px">Short guided sessions to anchor your mind and open your heart.</div>
+          <div class="vg" id="vid-g"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="bnav">
+    <button class="ni on" onclick="goRoom('home',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="ni" onclick="goRoom('garden',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5z"/><path d="M12 17a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5z"/><path d="M2 12a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0z"/><path d="M17 12a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0z"/></svg>
+      <span>Garden</span>
+    </button>
+    <button class="ni" onclick="goRoom('breathe',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg>
+      <span>Breathe</span>
+    </button>
+    <button class="ni" onclick="goRoom('log',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+      <span>Log</span>
+    </button>
+    <button class="ni" onclick="goRoom('journal',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span>Journal</span>
+    </button>
+    <button class="ni" onclick="goRoom('flowers',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5z"/><path d="M12 17a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5z"/><path d="M2 12a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0z"/><path d="M17 12a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0z"/></svg>
+      <span>Flowers</span>
+    </button>
+    <button class="ni" onclick="goRoom('reading',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <span>Reading</span>
+    </button>
+    <button class="ni" onclick="goRoom('med',this)">
+      <svg fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <span>Meditate</span>
+    </button>
+  </nav>
+
+  <!-- LOGOUT MODAL -->
+  <div class="modal-overlay" id="logout-modal">
+    <div class="modal-box">
+      <div class="modal-ico">🌱</div>
+      <div class="modal-h">Leave the sanctuary?</div>
+      <div class="modal-p">Your garden, points, and entries are saved on this device. Logging out clears your name so the next person can start fresh. Your data stays here.</div>
+      <div class="modal-btns">
+        <button class="modal-confirm" onclick="confirmLogout()">Yes, log me out</button>
+        <button class="modal-cancel" onclick="closeLogout()">Stay in my garden</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV GUIDE SHEET -->
+  <div class="navguide-overlay" id="navguide-modal" onclick="closeNavGuide(event)">
+    <div class="navguide-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-h">How to get around</div>
+      <div class="sheet-sub">Tap any room in the bar below — or use these room cards from Home.</div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#FFF3B0">🏠</div>
+        <div>
+          <div class="ng-name">Home</div>
+          <div class="ng-desc">Your dashboard. Sunflower preview, daily quote, and all your rooms. Always tap <strong>Home</strong> in the bottom bar to return here from anywhere.</div>
+          <span class="ng-info">Starting point</span>
+        </div>
+      </div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#EAF3DE">🌻</div>
+        <div>
+          <div class="ng-name">Garden</div>
+          <div class="ng-desc">Your living sunflower. Spend earned points to unlock gardening materials — each one grows a new petal. She starts as a seed.</div>
+          <span class="ng-info">Earn + spend pts</span>
+        </div>
+      </div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#FFF8D0">🌬️</div>
+        <div>
+          <div class="ng-name">Breathe</div>
+          <div class="ng-desc">Tap <strong>Start breathing</strong>, follow the golden orb. Inhale as it expands, exhale as it softens. Tap <strong>Stop</strong> when done to earn your point.</div>
+          <span class="ng-pts">+1 pt per session</span>
+        </div>
+      </div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#FFF3B0">📖</div>
+        <div>
+          <div class="ng-name">Log</div>
+          <div class="ng-desc">Choose your meditation length, write your mood and one gratitude, add a note. Tap <strong>Save entry</strong> to earn points.</div>
+          <span class="ng-pts">+2 pts per entry</span>
+        </div>
+      </div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#EAF3DE">🌿</div>
+        <div>
+          <div class="ng-name">Journal</div>
+          <div class="ng-desc">Write your weekly reflection, tap <strong>Save &amp; get my AI message</strong>. Your AI companion reads your entries and writes back a personal growth message.</div>
+          <span class="ng-pts">+3 pts + AI message</span>
+        </div>
+      </div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#FFF8D0">🌸</div>
+        <div>
+          <div class="ng-name">Flowers</div>
+          <div class="ng-desc">Tap any flower card to flip it — a botanical fact and a personal message appear. Tap again to flip back.</div>
+          <span class="ng-info">8 cards to discover</span>
+        </div>
+      </div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#FFF3B0">📚</div>
+        <div>
+          <div class="ng-name">Reading</div>
+          <div class="ng-desc">Browse your curated reading list. Finish a book, then tap <strong>Mark as read</strong> to earn points for your garden.</div>
+          <span class="ng-pts">+4 pts per book</span>
+        </div>
+      </div>
+      <div class="nav-guide-row">
+        <div class="ng-icon" style="background:#EAF3DE">🎵</div>
+        <div>
+          <div class="ng-name">Meditate</div>
+          <div class="ng-desc">Pick a timer length, tap <strong>Start</strong>, then choose a sound or guided video. Points are added automatically when the timer finishes.</div>
+          <span class="ng-pts">+pts on completion</span>
+        </div>
+      </div>
+      <div class="sheet-tip">
+        💡 <strong>To get back home:</strong> tap the <strong>🏠</strong> icon on the far left of the bottom bar. Tap <strong>?</strong> in the top right any time to reopen this guide.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const SK='gb_v1';
+function ld(){try{const r=localStorage.getItem(SK);return r?JSON.parse(r):{}}catch(e){return{}}}
+function sv(s){try{localStorage.setItem(SK,JSON.stringify(s))}catch(e){}}
+const S=ld();
+function set(k,v){S[k]=v;sv(S)}
+function pts(){return S.points||0}
+function addPts(n,label,tid){
+  S.points=(S.points||0)+n;sv(S);
+  document.getElementById('pts-v').textContent=S.points;
+  renderGarden();
+  if(tid)showToast(tid,'+'+n+' pts — '+label+'!');
+}
+function showToast(id,msg){
+  const t=document.getElementById(id);if(!t)return;
+  t.textContent=msg;t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),2500);
+}
+
+const STAGES=[
+  {min:0,  name:'Seed',                  desc:'A tiny seed full of infinite possibility.',                    petals:0},
+  {min:5,  name:'Sprout',                desc:'A tender shoot has broken through the soil.',                  petals:2},
+  {min:12, name:'Young stem',            desc:'Growing steadily and reaching for the light.',                 petals:4},
+  {min:22, name:'Budding sunflower',     desc:'The bud is forming. Your consistency is showing.',             petals:6},
+  {min:35, name:'Blooming sunflower',    desc:'Full golden bloom. Your calm is real and beautiful.',          petals:8},
+  {min:50, name:'Giant golden sunflower',desc:'A radiant field grown entirely from your own devotion.',       petals:10},
+];
+const SHOP=[
+  {id:'seeds',  ico:'🌱',name:'Seed packet',    cost:3,  d:"Your sunflower's very beginning."},
+  {id:'soil',   ico:'🪨',name:'Rich soil bag',  cost:5,  d:'Deep nourishment for strong roots.'},
+  {id:'water',  ico:'💧',name:'Watering can',   cost:7,  d:'Consistent water keeps her reaching higher.'},
+  {id:'gloves', ico:'🧤',name:'Garden gloves',  cost:10, d:'Protection for the gardener in you.'},
+  {id:'trowel', ico:'🪴',name:'Trowel',         cost:12, d:'A tool for planting deep with intention.'},
+  {id:'compost',ico:'🌿',name:'Leaf compost',   cost:15, d:'Old things becoming nourishment.'},
+  {id:'pot',    ico:'🏺',name:'Terracotta pot', cost:18, d:'A beautiful vessel for your sunflower.'},
+  {id:'sunjar', ico:'☀️',name:'Sunlight jar',   cost:22, d:'Captured morning light for cloudy days.'},
+  {id:'rain',   ico:'🫙',name:'Rain collector', cost:26, d:'Even rain is a gift when you receive it.'},
+  {id:'rainbow',ico:'🌈',name:'Rainbow seed',   cost:32, d:'The rarest bloom — for the most devoted.'},
+];
+const FLOWERS=[
+  {ico:'🌻',name:'Golden sunflower',mood:'Peaceful', fact:'Sunflowers track the sun across the sky — a behavior called heliotropism — until they fully mature.',       quote:'Peace is not the absence of storms. It is the quiet decision to bloom right through them.'},
+  {ico:'🌼',name:'Drooping daisy',  mood:'Quiet',    fact:'Daisies close their petals each night to protect their pollen, opening fresh with every new morning.',     quote:'Quiet days are not empty days. They are the days your deepest roots grow strongest.'},
+  {ico:'🌻',name:'Giant mammoth',   mood:'Motivated',fact:'Giant Mammoth sunflowers can grow over 14 feet tall — the tallest sunflower variety in existence.',         quote:"Motivation is not a fire you find. It's a garden you water every single day, even when you don't feel ready."},
+  {ico:'🔥',name:'Ring of fire',    mood:'Grateful', fact:'Ring of Fire sunflowers bloom in rich bi-colored red and gold — one of the rarest natural patterns.',       quote:'Gratitude is not a feeling you wait for. It is the very soil that makes everything else grow faster.'},
+  {ico:'🌙',name:'Moonflower',      mood:'Rest',     fact:'Moonflowers only bloom after dark, releasing a sweet fragrance that drifts through the entire night.',      quote:'Rest is not giving up. Rest is how the moon charges the tide. You are allowed to soften completely.'},
+  {ico:'🧸',name:'Teddy bear',      mood:'Hopeful',  fact:'Teddy Bear sunflowers are fully double-petaled, forming a lush fluffy golden pompom at full bloom.',        quote:'Hope does not ask for certainty. Hope simply says: I will plant anyway. And I will always mean it.'},
+  {ico:'💜',name:'Chocolate cherry',mood:'Deep',     fact:'Chocolate Cherry sunflowers are deep burgundy-red with dark chocolate centers — striking and rare.',        quote:'Your depth is not a darkness. It is exactly where your most beautiful blooms are waiting.'},
+  {ico:'🌸',name:'Italian white',   mood:'Calm',     fact:'Italian White sunflowers produce creamy pale petals with a dark center — elegant, rare, and stunning.',     quote:'Calm is not the absence of feeling. Calm is choosing yourself gently, even when everything feels loud.'},
+];
+const BOOKS=[
+  {t:'The Game of Life and How to Play It',a:'Florence Scovel Shinn',  c:'#C88A00',l:'"Your word is your wand." What you speak and believe shapes your reality. Choose your thoughts like seeds.'},
+  {t:'Atomic Habits',                       a:'James Clear',            c:'#3B6D11',l:"1% better every day compounds into transformation. You don't rise to your goals — you fall to your systems."},
+  {t:'The Four Agreements',                 a:'Don Miguel Ruiz',        c:'#854F0B',l:"Be impeccable with your word. Don't take anything personally. Always do your best."},
+  {t:'The Power of Now',                    a:'Eckhart Tolle',          c:'#185FA5',l:'The present moment is the only place where life exists. Every time you return to it, you are home.'},
+  {t:'Think and Grow Rich',                 a:'Napoleon Hill',          c:'#993C1D',l:'Desire backed by burning faith and persistent action is the beginning of every achievement ever accomplished.'},
+  {t:"Man's Search for Meaning",            a:'Viktor Frankl',          c:'#534AB7',l:'When we cannot change a situation, we are challenged to change ourselves. Meaning is always available.'},
+  {t:'The Alchemist',                       a:'Paulo Coelho',           c:'#0F6E56',l:'"When you want something, all the universe conspires in helping you achieve it."'},
+  {t:'You Are a Badass',                    a:'Jen Sincero',            c:'#D4537E',l:'Stop doubting your greatness and start living an awesome life. You were born for exactly this.'},
+  {t:'The Universe Has Your Back',          a:'Gabrielle Bernstein',    c:'#7F77DD',l:'When you shift from fear to love, you align with the infinite power of the universe.'},
+  {t:'Women Who Run With the Wolves',       a:'Clarissa Pinkola Estés', c:'#B84F08',l:'The wild woman calls us back to our instincts. She is the river beneath the river. She is you.'},
+];
+const VIDS=[
+  {id:'inrG68KCgp0',t:'5-minute morning meditation',  d:'5 min', bg:'#8B3A06'},
+  {id:'O-6f5wQXSu8',t:'Body scan for deep rest',      d:'10 min',bg:'#2E5A08'},
+  {id:'ZToicYcHIOU',t:'Loving kindness for yourself', d:'8 min', bg:'#3C3489'},
+  {id:'z6X5oEIg6Ak',t:'Gratitude and abundance',      d:'12 min',bg:'#8A5500'},
+  {id:'mXM2-A9SFdE',t:'Breathwork for anxiety',       d:'7 min', bg:'#0C447C'},
+  {id:'VnFpCxE4bJk',t:'Sunflower visualization',      d:'15 min',bg:'#27500A'},
+];
+const QUOTES=[
+  'Like a sunflower, turn gently toward the light.',
+  'Growth can be quiet and still be beautiful.',
+  'Let your peace open one petal at a time.',
+  'The sun still rises for slow healing.',
+  'Breathe in warmth. Breathe out worry.',
+  'Still waters grow the deepest roots.',
+  'You are already enough. Growth is a gift, not a demand.',
+  'Every storm ends with the earth more nourished than before.',
+  'She stood in the storm and adjusted her sails.',
+  'Bloom where you are planted — even if the soil feels hard.',
+];
+
+function goRoom(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.getElementById('v-'+id).classList.add('on');
+  if(btn)btn.classList.add('on');
+  const vEl=document.getElementById('v-'+id);
+  if(vEl)vEl.scrollTop=0;
+  if(id==='journal')renderJStats();
+  if(id==='garden')renderGarden();
+}
+
+function spawnPetals(){
+  const bg=document.getElementById('fp-bg');
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');p.className='fp';
+    p.style.cssText=`left:${Math.random()*100}%;width:${11+Math.random()*14}px;height:${19+Math.random()*22}px;animation-duration:${18+Math.random()*22}s;animation-delay:${Math.random()*22}s;transform:rotate(${Math.random()*360}deg)`;
+    bg.appendChild(p);
+  }
+}
+
+function doEnter(skip){
+  const raw=document.getElementById('name-inp').value.trim();
+  const name=skip?(S.userName||''):(raw||'');
+  if(name)set('userName',name);
+  const today=new Date().toISOString().split('T')[0];
+  if(S.lastVisit!==today){
+    const yest=new Date(Date.now()-86400000).toISOString().split('T')[0];
+    S.streakDays=(S.lastVisit===yest)?(S.streakDays||0)+1:1;
+    S.lastVisit=today;sv(S);
+  }
+  document.getElementById('landing').classList.add('out');
+  setTimeout(()=>{
+    document.getElementById('landing').style.display='none';
+    document.getElementById('shell').style.display='flex';
+  },750);
+  renderAll();
+}
+document.getElementById('name-inp').addEventListener('keydown',e=>{if(e.key==='Enter')doEnter()});
+
+if(S.userName){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('shell').style.display='flex';
+  const today=new Date().toISOString().split('T')[0];
+  if(S.lastVisit!==today){
+    const yest=new Date(Date.now()-86400000).toISOString().split('T')[0];
+    S.streakDays=(S.lastVisit===yest)?(S.streakDays||0)+1:1;
+    S.lastVisit=today;sv(S);
+  }
+  renderAll();
+}else{spawnPetals();}
+
+function greeting(){const h=new Date().getHours();if(h<12)return'Good morning';if(h<17)return'Good afternoon';if(h<21)return'Good evening';return'Good night';}
+function getStage(){return[...STAGES].reverse().find(s=>(S.points||0)>=s.min)||STAGES[0];}
+
+function renderAll(){
+  renderHome();renderGarden();renderFlowers();renderBooks();renderVids();renderEntries();
+  document.getElementById('ld').value=new Date().toISOString().split('T')[0];
+  const k=sessionStorage.getItem('gb_key');
+  if(k){S._key=k;document.getElementById('key-ok').style.display='block';}
+}
+
+function renderHome(){
+  const name=S.userName||'';const p=pts();
+  const streak=S.streakDays||0;const stage=getStage();const si=STAGES.indexOf(stage);
+  const gr=greeting();
+  document.getElementById('tb-name').textContent=name?`${name}'s sanctuary`:'Girl, Breathe.';
+  document.getElementById('pts-v').textContent=p;
+  document.getElementById('h-tag').textContent=gr;
+  document.getElementById('h-who').textContent=name?`Welcome back, ${name}.`:'';
+  document.getElementById('h-name').innerHTML=name?`${gr},<br/><em>${name}.</em>`:`Welcome,<br/><em>beautiful soul.</em>`;
+  document.getElementById('h-msg').textContent=p>0?`You have ${p} growth points. Your sunflower is ${stage.name.toLowerCase()}. Keep showing up for yourself.`:`Your garden is waiting. Every room here is yours — breathe, write, grow, and watch your sunflower bloom.`;
+  document.getElementById('h-streak').textContent=`${streak} day streak`;
+  document.getElementById('h-pts').textContent=`${p} pts`;
+  document.getElementById('h-stage').textContent=`${stage.name} — Stage ${si+1}`;
+  document.getElementById('h-sn').textContent=stage.name;
+  document.getElementById('h-sd').textContent=stage.desc;
+  ['g-who','br-who','lg-who','jn-who'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=name?`${gr}, ${name}.`:''});
+  drawMiniSF(stage.petals,38,36,'h-pg','h-or','h-ct','h-seed',23);
+  document.getElementById('q-txt').textContent=QUOTES[new Date().getDate()%QUOTES.length];
+}
+
+function drawMiniSF(n,ox,oy,pgId,orId,ctId,seedId,dist){
+  const g=document.getElementById(pgId);
+  const or=document.getElementById(orId);
+  const ct=document.getElementById(ctId);
+  const seed=document.getElementById(seedId);
+  g.innerHTML='';
+  if(n===0){if(seed)seed.style.display='block';or.setAttribute('r','0');ct.setAttribute('r','0');return;}
+  if(seed)seed.style.display='none';
+  or.setAttribute('r','15');ct.setAttribute('r','10');
+  const fills=['#F5C842','#E8B830'];
+  for(let i=0;i<n;i++){
+    const ang=(i/n)*360,rad=ang*Math.PI/180;
+    const cx=(ox+dist*Math.sin(rad)).toFixed(1),cy=(oy-dist*Math.cos(rad)).toFixed(1);
+    const el=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    el.setAttribute('cx',cx);el.setAttribute('cy',cy);
+    el.setAttribute('rx','5');el.setAttribute('ry','11');
+    el.setAttribute('fill',fills[i%2]);
+    el.setAttribute('transform',`rotate(${ang} ${cx} ${cy})`);
+    g.appendChild(el);
+  }
+}
+
+function drawMainSF(n){
+  const g=document.getElementById('sf-pg');
+  const or=document.getElementById('sf-or');
+  const ct=document.getElementById('sf-ct');
+  const seeds=document.getElementById('sf-sd-g');
+  const seedShow=document.getElementById('sf-seed-show');
+  const leaves=document.getElementById('sf-lv');
+  g.innerHTML='';
+  if(n===0){seedShow.style.display='block';leaves.style.opacity='0';or.setAttribute('r','0');ct.setAttribute('r','0');seeds.style.opacity='0';return;}
+  seedShow.style.display='none';leaves.style.opacity='1';
+  or.setAttribute('r',n>=2?'34':'22');ct.setAttribute('r',n>=2?'24':'15');
+  seeds.style.opacity=n>=5?'1':'0';
+  const fills=['#F5C842','#E8B830','#F0C038','#DDAA28','#FAD040','#E6B020'];
+  for(let i=0;i<n;i++){
+    const delay=i*0.07;
+    const angleDeg=(i/n)*360;
+    const angleRad=angleDeg*Math.PI/180;
+    const cx=(105+54*Math.sin(angleRad)).toFixed(1);
+    const cy=(108-54*Math.cos(angleRad)).toFixed(1);
+    const el=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    el.setAttribute('cx',cx);el.setAttribute('cy',cy);
+    el.setAttribute('rx','13');el.setAttribute('ry','28');
+    el.setAttribute('fill',fills[i%fills.length]);
+    el.setAttribute('opacity','0.96');
+    el.setAttribute('transform',`rotate(${angleDeg} ${cx} ${cy})`);
+    el.style.transformOrigin=`${cx}px ${cy}px`;
+    el.style.animation=`petalIn .55s ${delay.toFixed(2)}s cubic-bezier(.34,1.56,.64,1) both`;
+    el.style.setProperty('--ra',angleDeg+'deg');
+    g.appendChild(el);
+  }
+}
+
+function renderGarden(){
+  const owned=Object.keys(S.shop||{}).filter(k=>(S.shop||{})[k]).length;
+  const p=pts();const stage=getStage();const si=STAGES.indexOf(stage);
+  document.getElementById('sf-lbl').textContent=stage.name;
+  document.getElementById('sf-dsc').textContent=stage.desc;
+  document.getElementById('g-stage').textContent=`Stage ${si+1} — ${stage.name}`;
+  document.getElementById('g-pts').textContent=`${p} pts available`;
+  document.getElementById('sf-sn').textContent=`Stage ${si+1} of 6`;
+  const next=STAGES[si+1];
+  if(next){
+    const pct=Math.min(((p-stage.min)/(next.min-stage.min))*100,100);
+    document.getElementById('sf-pf').style.width=Math.round(pct)+'%';
+    document.getElementById('sf-pl').textContent=`${p} / ${next.min} pts`;
+  }else{
+    document.getElementById('sf-pf').style.width='100%';
+    document.getElementById('sf-pl').textContent='Full bloom! 🌻';
+  }
+  drawMainSF(owned);renderShop();
+}
+
+function renderShop(){
+  const shop=S.shop||{};const p=pts();
+  document.getElementById('shop-g').innerHTML=SHOP.map(item=>{
+    const owned=!!shop[item.id];const canBuy=!owned&&p>=item.cost;
+    return`<div class="si${owned?' owned':''}">
+      <div class="si-ico">${item.ico}</div>
+      <div class="si-name">${item.name}</div>
+      <div class="si-cost">${item.cost} pts</div>
+      <div class="si-desc">${item.d}</div>
+      ${owned
+        ?'<button class="si-btn si-got" disabled>Unlocked ✓</button>'
+        :`<button class="si-btn ${canBuy?'si-buy':'si-lck'}" onclick="buyItem('${item.id}',${item.cost})" ${canBuy?'':'disabled'}>${canBuy?'Unlock':'Need '+item.cost+' pts'}</button>`}
+    </div>`;
+  }).join('');
+}
+
+function buyItem(id,cost){
+  if((S.shop||{})[id]||pts()<cost)return;
+  S.points=(S.points||0)-cost;
+  const sh={...(S.shop||{})};sh[id]=true;S.shop=sh;sv(S);
+  document.getElementById('pts-v').textContent=S.points;
+  const item=SHOP.find(i=>i.id===id);
+  const t=document.getElementById('shop-toast');
+  t.textContent=`${item.ico} ${item.name} unlocked! A new petal blooms.`;
+  t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2800);
+  renderGarden();
+}
+
+let bInt=null,bPhase=0,bSes=0;
+function startBreath(){stopBreath();bPhase=0;bSes=0;tickBreath();bInt=setInterval(tickBreath,4000);}
+function stopBreath(){
+  clearInterval(bInt);bInt=null;
+  const o=document.getElementById('borb');o.className='borb';o.textContent='Tap to begin';
+  document.getElementById('b-ph').textContent='';document.getElementById('b-cnt').textContent='';
+  if(bSes>0)addPts(1,'breathing session','');
+}
+function tickBreath(){
+  bPhase++;
+  const o=document.getElementById('borb');
+  if(bPhase%2===1){
+    o.className='borb inh';o.textContent='Inhale';
+    document.getElementById('b-ph').textContent='Breathe in slowly... 1... 2... 3... 4...';
+  }else{
+    o.className='borb exh';o.textContent='Exhale';
+    document.getElementById('b-ph').textContent='Release gently... let it all go...';
+    bSes++;
+    document.getElementById('b-cnt').textContent=bSes+' breath cycle'+(bSes===1?'':'s')+' complete';
+  }
+}
+function setMood(btn,mood){
+  document.querySelectorAll('.mp').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');set('mood',mood);
+}
+
+function saveLog(){
+  const d=document.getElementById('ld').value;
+  const m=Number(document.getElementById('lm').value);
+  const mo=document.getElementById('lmo').value.trim();
+  const gr=document.getElementById('lgr').value.trim();
+  const nt=document.getElementById('lnt').value.trim();
+  if(!d){alert('Please choose a date.');return;}
+  const mp={5:1,10:2,20:3,60:5}[m]||1;
+  const entries=[...(S.entries||[])];
+  entries.push({date:d,min:m,mood:mo,grat:gr,note:nt,ts:Date.now()});
+  S.entries=entries;sv(S);
+  document.getElementById('lmo').value='';
+  document.getElementById('lgr').value='';
+  document.getElementById('lnt').value='';
+  addPts(mp+2,'meditation + journal','log-toast');
+  renderEntries();
+}
+function renderEntries(){
+  const el=document.getElementById('entries-l');
+  const entries=S.entries||[];
+  if(!entries.length){el.innerHTML='<div class="mu">No entries yet. Your first log will appear here.</div>';return;}
+  el.innerHTML=[...entries].reverse().map(e=>`
+    <div class="ec">
+      <div class="et"><strong style="font-size:.83rem">${e.date}</strong><span class="eb">${e.min===60?'1 hr':e.min+' min'}</span></div>
+      ${e.mood?`<div style="font-size:.76rem;color:var(--txt-mu)">Mood: <strong style="color:var(--txt-m)">${e.mood}</strong></div>`:''}
+      ${e.grat?`<div style="font-size:.76rem;color:var(--txt-mu)">Grateful: ${e.grat}</div>`:''}
+      ${e.note?`<div style="font-size:.74rem;color:var(--txt-mu);margin-top:4px;line-height:1.62">${e.note}</div>`:''}
+    </div>`).join('');
+}
+
+function renderJStats(){
+  const entries=S.entries||[];
+  document.getElementById('j-se').textContent=entries.length;
+  document.getElementById('j-mi').textContent=entries.reduce((s,e)=>s+e.min,0);
+  document.getElementById('j-pt').textContent=pts();
+  document.getElementById('j-rf').textContent=(S.reflections||[]).length;
+}
+function saveKey(){
+  const k=document.getElementById('api-k').value.trim();
+  if(!k){alert('Please paste your API key.');return;}
+  S._key=k;sessionStorage.setItem('gb_key',k);
+  document.getElementById('key-ok').style.display='block';
+  document.getElementById('api-k').value='';
+}
+async function saveRef(){
+  const txt=document.getElementById('wref').value.trim();
+  if(!txt){alert('Write your reflection first — even a few words.');return;}
+  const refs=[...(S.reflections||[])];
+  refs.push({date:new Date().toISOString().split('T')[0],text:txt});
+  S.reflections=refs;sv(S);
+  document.getElementById('wref').value='';
+  addPts(3,'weekly reflection','ref-toast');
+  renderJStats();renderPastRefs();
+  await callAI(txt);
+}
+function renderPastRefs(){
+  const refs=S.reflections||[];if(!refs.length)return;
+  document.getElementById('past-c').style.display='block';
+  document.getElementById('past-r').innerHTML=[...refs].reverse().map(r=>`
+    <div style="padding:8px 0;border-bottom:1px solid var(--bdr-s);font-size:.8rem;color:var(--txt-m);line-height:1.7">
+      <div style="font-size:.68rem;color:var(--txt-h);margin-bottom:3px">${r.date}</div>${r.text}
+    </div>`).join('');
+}
+async function callAI(reflection){
+  const key=S._key||sessionStorage.getItem('gb_key')||'';
+  const ab=document.getElementById('ai-txt');
+  ab.className='ai-txt idle';
+  if(!key){ab.textContent='Add your Anthropic API key above to receive a personal AI growth message.';return;}
+  ab.innerHTML=`<div class="dot-row"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span style="font-size:.76rem;color:rgba(245,200,66,.48);margin-left:5px">Your companion is writing...</span></div>`;
+  const recent=(S.entries||[]).slice(-7).map(e=>`${e.date} | ${e.min}min | mood:"${e.mood||'—'}" | grateful:"${e.grat||'—'}" | note:"${e.note||'—'}"`).join('\n');
+  const prompt=`You are a warm, poetic, deeply empowering garden companion for a women's mindfulness app called "Girl, Breathe — Sunflower Sanctuary".\n\nUser's weekly reflection:\n"${reflection}"\n\nRecent entries:\n${recent||'None yet.'}\n\nCurrent mood: ${S.mood||'Peaceful'}\n\nWrite a deeply personal 3-4 sentence growth message using sunflower and garden metaphors. Celebrate specifically what she shared. Use second person. Be poetic but grounded. End with one gentle, specific encouragement for the week. Never use hollow affirmations. Make it feel written only for her.`;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error.message);
+    ab.className='ai-txt';
+    ab.textContent=data.content?.[0]?.text||'Your garden heard every word.';
+  }catch(err){
+    ab.className='ai-txt';
+    ab.textContent='Your reflection has been planted in the garden. Every word you wrote is a root growing deeper. Keep showing up — that is the whole practice.';
+  }
+}
+
+function renderFlowers(){
+  document.getElementById('flower-g').innerHTML=FLOWERS.map((f,i)=>`
+    <div class="fcw" id="fc${i}" onclick="document.getElementById('fc${i}').classList.toggle('flip')">
+      <div class="fci">
+        <div class="fcf fc-fr">
+          <div class="fc-ico">${f.ico}</div>
+          <div class="fc-nm">${f.name}</div>
+          <div class="fc-md">${f.mood}</div>
+          <div class="fc-ht">Tap to reveal</div>
+        </div>
+        <div class="fcf fc-bk">
+          <div class="fc-ft">${f.fact}</div>
+          <div class="fc-qt">${f.quote}</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderBooks(){
+  document.getElementById('book-g').innerHTML=BOOKS.map((b,i)=>`
+    <div class="bc">
+      <div class="bc-hd">
+        <div class="bc-sp" style="background:${b.c}"></div>
+        <div><div class="bc-ti">${b.t}</div><div class="bc-au">by ${b.a}</div></div>
+      </div>
+      <div class="bc-ls">${b.l}</div>
+      <span class="bc-pt">+4 pts on completion</span>
+      <button class="bc-btn${(S.books||{})[i]?' done':''}" id="bb${i}" onclick="markBook(${i})">${(S.books||{})[i]?'Read ✓':'Mark as read'}</button>
+    </div>`).join('');
+}
+function markBook(i){
+  if((S.books||{})[i])return;
+  const bk={...(S.books||{})};bk[i]=true;S.books=bk;sv(S);
+  document.getElementById('bb'+i).textContent='Read ✓';
+  document.getElementById('bb'+i).classList.add('done');
+  addPts(4,'book completed','');
+}
+
+let tInt=null,tSecs=0,tRunning=false,tMins=0;
+function setT(m,btn){
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');tMins=m;tSecs=m*60;updT();
+}
+function updT(){
+  const m=String(Math.floor(tSecs/60)).padStart(2,'0');
+  const s=String(tSecs%60).padStart(2,'0');
+  document.getElementById('t-disp').textContent=m+':'+s;
+}
+function startT(){
+  if(tRunning)return;
+  if(tSecs===0){alert('Please select a timer length first — tap 5, 10, 20 or 60 min.');return;}
+  tRunning=true;
+  tInt=setInterval(()=>{
+    if(tSecs>0){tSecs--;updT();}
+    else{
+      clearInterval(tInt);tRunning=false;
+      const p={5:1,10:2,20:3,60:5}[tMins]||2;
+      addPts(p,'meditation complete','');
+      alert('Meditation complete. You showed up for yourself. 🌻');
+    }
+  },1000);
+}
+function resetT(){clearInterval(tInt);tRunning=false;tSecs=0;updT();}
+
+function playM(id,btn){
+  document.querySelectorAll('.mb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('m-frame').src='https://www.youtube-nocookie.com/embed/'+id+'?controls=1&rel=0&autoplay=1';
+}
+function renderVids(){
+  document.getElementById('vid-g').innerHTML=VIDS.map((v,i)=>`
+    <div class="vc" id="vc${i}" onclick="playVid(${i})">
+      <div class="vt" style="background:${v.bg}44">
+        <div class="vplay"><svg viewBox="0 0 24 24" fill="${v.bg}88" stroke="none"><polygon points="5,3 19,12 5,21"/></svg></div>
+      </div>
+      <div class="vi"><div class="vn">${v.t}</div><div class="vd">${v.d}</div></div>
+    </div>`).join('');
+}
+function playVid(i){
+  document.getElementById('m-frame').src='https://www.youtube-nocookie.com/embed/'+VIDS[i].id+'?controls=1&rel=0&autoplay=1';
+  document.querySelectorAll('.vc').forEach((c,ci)=>c.classList.toggle('pl',ci===i));
+}
+
+function openLogout(){document.getElementById('logout-modal').classList.add('open');}
+function closeLogout(){document.getElementById('logout-modal').classList.remove('open');}
+function confirmLogout(){
+  delete S.userName;sv(S);
+  window.location.reload();
+}
+document.getElementById('logout-modal').addEventListener('click',function(e){if(e.target===this)closeLogout();});
+
+function openNavGuide(){document.getElementById('navguide-modal').classList.add('open');}
+function closeNavGuide(e){
+  if(!e||e.target===document.getElementById('navguide-modal'))
+    document.getElementById('navguide-modal').classList.remove('open');
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeLogout();document.getElementById('navguide-modal').classList.remove('open');}
+});
+</script>
+</body>
+</html>          
