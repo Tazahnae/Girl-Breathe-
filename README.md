@@ -1,3 +1,4 @@
+<img width="680" height="320" alt="sunflower-garden" src="https://github.com/user-attachments/assets/8dced185-0ae0-4ac1-b552-27221ba3017a" />
 # 🌿 A Note from the Creator
 
 > This app was born from a real need — a place that felt like a warm, quiet room just for you. No noise. No comparison. Just you and your growth.*
