@@ -7,3 +7,4 @@
 > *Every feature was chosen with love and intention. Every word was written as if I was writing it to myself.*
 
 Made by Ta'Zahnae Matthews with love 🌻
+sunflower-garden.svg
